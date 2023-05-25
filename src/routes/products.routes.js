@@ -1,4 +1,4 @@
-import productsc from "../controllers/products.js";
+import productsc from "../DAO/controllers/products.js";
 import { Router } from 'express';
 
 const router = Router();

@@ -13,6 +13,8 @@ import {engine} from "express-handlebars";
 
 import productsRoutes from './routes/products.routes.js';
 
+import cartRoutes from './routes/cart.routes.js';
+
 const publics = path.join(__dirname, "./public")
 
 const app = express();
@@ -39,6 +41,8 @@ app.use(express.urlencoded({extended:true}));
 app.use("/", router);
 
 app.use('/products', productsRoutes);
+
+app.use('/cart', cartRoutes);
 
 app.engine('handlebars', engine());
 

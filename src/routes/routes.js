@@ -1,7 +1,7 @@
 import express from "express";
 const router = express.Router();
 
-import userManager from "../controllers/users.js";
+import userManager from "../DAO/controllers/users.js";
 
 import { uploader } from "../utils.js";
 

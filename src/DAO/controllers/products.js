@@ -3,7 +3,7 @@ import  productModel  from "../models/products.js"
 class Product {
 
     constructor() {
-
+        
     }
 
     async getAll(){
