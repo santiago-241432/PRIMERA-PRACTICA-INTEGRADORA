@@ -42,7 +42,7 @@ app.use("/", router);
 
 app.use('/products', productsRoutes);
 
-app.use('/cart', cartRoutes);
+app.use('/api/carts', cartRoutes);
 
 app.engine('handlebars', engine());
 
