@@ -1,4 +1,4 @@
-import express from "express";
+/*import express from "express";
 const router = express.Router();
 
 import userManager from "../DAO/controllers/users.js";
@@ -47,4 +47,4 @@ router.get('/users/list', async (req, res) => {
     }
 });
 
-export default router;
+export default router;*/

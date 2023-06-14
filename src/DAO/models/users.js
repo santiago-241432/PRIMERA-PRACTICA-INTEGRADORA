@@ -1,49 +1,11 @@
 import mongoose from 'mongoose';
 
-import db from './db.js';
+const UserSchema = new mongoose.Schema({
+    name: String,
+    email: String,
+    password: String
+})
 
+const userModel = mongoose.model("user",UserSchema);
 
-
-const collection = 'users';
-
-const schema = new mongoose.Schema({
-    Name: {
-        type: String,
-        required: true,
-    },
-    Lastname: {
-        type: String,
-        required: true,
-    },
-    Age: {
-        type: Number,
-        required: true,
-    },
-
-    ProfilePicture: {
-        type: String,
-        required: true,
-    },
-
-});
-
-schema.statics.createUser = async function (user) {
-    try {
-
-        const newUser = new this(user);
-        const result = await newUser.save();
-        return result;
-
-
-    } catch (error) {
-        console.error('Error al crear usuario:', error);
-        throw error;
-    }
-};
-
-
-
-
-const usersModel = db.model(collection, schema);
-
-export default usersModel;
+export default userModel;
