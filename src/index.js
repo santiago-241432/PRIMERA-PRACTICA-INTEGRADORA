@@ -8,11 +8,19 @@ import session from "express-session";
 
 import MongoStore from "connect-mongo";
 
-import route from "./routes/views.router.js"
+import route from "./routes/views.router.js";
+
+import passport from "passport";
+
+import initializePassport from "./config/passport.config.js";
+
+import sessionsRouter from "./routes/session.router.js"
 
 const app = express();
 
 app.use("/", route);
+
+app.use("/api/sessions", sessionsRouter);
 
 app.engine('handlebars', engine());
 
@@ -32,6 +40,9 @@ app.use(session({
 }
 
 ))
+initializePassport();
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 const PORT = process.env.PORT || 8080;
