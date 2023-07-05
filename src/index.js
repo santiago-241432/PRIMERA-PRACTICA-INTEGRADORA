@@ -14,13 +14,9 @@ import passport from "passport";
 
 import initializePassport from "./config/passport.config.js";
 
-import sessionsRouter from "./routes/session.router.js"
-
 const app = express();
 
 app.use("/", route);
-
-app.use("/api/sessions", sessionsRouter);
 
 app.engine('handlebars', engine());
 

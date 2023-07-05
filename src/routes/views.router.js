@@ -2,6 +2,8 @@ import userModel from '../DAO/models/users.js';
 import { Router } from 'express';
 import { CreateHash, isValidPassword } from '../utils.js';
 
+import passport from 'passport';
+
 const route = Router();
 
 route.get('/', (req,res)=>{
@@ -12,7 +14,7 @@ route.get('/register', (req,res)=>{
     res.render('register');
 })
 
-route.post('register', passport.authenticate('register',{failureRedirect:'/failregister'}), async (req,res)=>{
+route.post('/register', passport.authenticate('register',{failureRedirect:'/failregister'}), async (req,res)=>{
     res.send({status:"success", message:"usuario registrado"})
 })
 
@@ -25,24 +27,10 @@ route.get('/login', (req,res)=>{
     res.render('login');
 })
 
-route.post('/login', async(req,res)=>{
-    
-    const { email, password}= req.body;
-    try{  
-        if(!email || !password)return res.status(400).send({error: "Incomplete values" })
-
-        const user = await user.findOne({email:email}, {email:1, name:1, password:1});
-
-        if(!user)return res.status(400).send({error: "User not found" })
-        if(!isValidPassword(user,password))return res.status(403).send({error: "Incorrect password" }) 
-        delete user.password;
-        req.session.user = user;
-        res.render('product')
-
-    }catch(error){
-        res.redirect('/login');
-    }
-})
+route.post("/login", passport.authenticate('login',{
+    successRedirect: "/product",
+    failureRedirect: "/login"
+}));
 
 route.get('/product', (req,res)=>{
     res.render('product');
